@@ -8,7 +8,7 @@ secrets:
     file: ./src/secrets/postgres-password
   postgres_username:
     file: ./src/secrets/postgres-username
-  private-ssh-key:
+  private_ssh_key:
     file: ./src/secrets/private-ssh-key
   rdp_password:
     file: ./src/secrets/rdp-password
