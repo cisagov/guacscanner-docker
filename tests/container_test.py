@@ -35,7 +35,10 @@ def test_container_count(dockerc):
 
 def test_wait_for_exits(main_container, version_container):
     """Wait for containers to exit."""
-    assert main_container.wait() == 0, "Container service (main) did not exit cleanly"
+    # assert main_container.wait() == 0, "Container service (main) did not exit cleanly"
+    assert (
+        main_container.wait() == 1
+    ), "Container service (main) did not exit as expected"
     assert (
         version_container.wait() == 0
     ), "Container service (version) did not exit cleanly"
