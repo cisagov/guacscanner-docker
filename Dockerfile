@@ -49,9 +49,15 @@ ENV DEPS \
     libpq-dev
 ENV INSTALL_DEPS \
     wget
+# Temporary
+ENV TEMP_DEPS \
+    sudo \
+    vim
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
-    ${DEPS} ${INSTALL_DEPS}
+    ${DEPS} ${INSTALL_DEPS} ${TEMP_DEPS}
+# Temporary
+RUN echo ${CISA_USER}     "ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 WORKDIR ${CISA_HOME}
 
