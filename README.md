@@ -24,7 +24,7 @@ appropriate for Docker containers and the major languages that we use.
 To run the `cisagov/example` image via Docker:
 
 ```console
-docker run cisagov/example:0.0.1-rc.12
+docker run cisagov/example:0.0.1-rc.13
 ```
 
 ### Running with Docker Compose ###
@@ -37,7 +37,7 @@ docker run cisagov/example:0.0.1-rc.12
 
     services:
       example:
-        image: cisagov/example:0.0.1-rc.12
+        image: cisagov/example:0.0.1-rc.13
         volumes:
           - type: bind
             source: <your_log_dir>
@@ -82,7 +82,7 @@ environment variables.  See the
 
     services:
       example:
-        image: cisagov/example:0.0.1-rc.12
+        image: cisagov/example:0.0.1-rc.13
         volumes:
           - type: bind
             source: <your_log_dir>
@@ -125,7 +125,7 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/example:0.0.1-rc.12
+    docker pull cisagov/example:0.0.1-rc.13
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -135,7 +135,7 @@ environment variables.  See the
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that they
 containerize.  It is recommended that most users use a version tag (e.g.
-`:0.0.1-rc.12`).
+`:0.0.1-rc.13`).
 
 | Image:tag | Description |
 |-----------|-------------|
@@ -196,8 +196,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=0.0.1-rc.12 \
-  --tag cisagov/example:0.0.1-rc.12 \
+  --build-arg VERSION=0.0.1-rc.13 \
+  --tag cisagov/example:0.0.1-rc.13 \
   https://github.com/cisagov/example.git#develop
 ```
 
@@ -227,9 +227,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=0.0.1-rc.12 \
+      --build-arg VERSION=0.0.1-rc.13 \
       --output type=docker \
-      --tag cisagov/example:0.0.1-rc.12 .
+      --tag cisagov/example:0.0.1-rc.13 .
     ```
 
 ## New repositories from a skeleton ##
