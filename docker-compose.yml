@@ -29,7 +29,7 @@ services:
       dockerfile: Dockerfile
     image: cisagov/guacscanner
     init: true
-    restart: "no"
+    restart: always
     secrets:
       - source: postgres_password
         target: postgres-password
