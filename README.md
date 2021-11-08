@@ -97,9 +97,9 @@ tag (e.g. `:0.0.1`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/guacscanner:1.2.3`| An exact release version. |
-|`cisagov/guacscanner:1.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/guacscanner:1`| The most recent release matching the major version number. |
+|`cisagov/guacscanner:0.0.1`| An exact release version. |
+|`cisagov/guacscanner:0.0`| The most recent release matching the major and minor version numbers. |
+|`cisagov/guacscanner:0`| The most recent release matching the major version number. |
 |`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 |`cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
 |`cisagov/guacscanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
