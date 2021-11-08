@@ -19,6 +19,8 @@ def test_container_count(dockerc):
     ), "Wrong number of containers were started."
 
 
+# TODO: Implement this test.  See cisagov/guacscanner-docker#3 for
+# more details.
 # def test_wait_for_ready(main_container):
 #     """Wait for container to be ready."""
 #     TIMEOUT = 10
@@ -44,6 +46,8 @@ def test_wait_for_exits(main_container, version_container):
     ), "Container service (version) did not exit cleanly"
 
 
+# TODO: Implement this test.  See cisagov/guacscanner-docker#3 for
+# more details.
 # def test_output(main_container):
 #     """Verify the container had the correct output."""
 #     main_container.wait()  # make sure container exited if running test isolated
