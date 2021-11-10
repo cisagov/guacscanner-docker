@@ -16,9 +16,9 @@ ARG VERSION
 # will not be included in the final Docker image.
 ###
 ENV DEPS \
-    libpq-dev
+    libpq-dev=13.4-0+deb11u1
 ENV INSTALL_DEPS \
-    wget
+    wget=1.21-1+b1
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
     ${DEPS} ${INSTALL_DEPS}
@@ -67,7 +67,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 # Dependencies
 ###
 ENV DEPS \
-    libpq-dev
+    libpq-dev=13.4-0+deb11u1
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
     ${DEPS}
