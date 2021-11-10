@@ -17,8 +17,23 @@ ARG VERSION
 ###
 ENV DEPS \
     libpq-dev=13.4-0+deb11u1
+# I'd like to pin the version of wget to keep the build reproducible,
+# but it's tricky.
+#
+# I need to use version 1.21-1+b1 of wget for amd64 and version 1.21-1
+# of wget otherwise.
+# https://packages.debian.org/bullseye/wget
+#
+# I presume the solution is to somehow make use of this jazz:
+# https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope)
+#
+# But I don't see a way to do ternary logic with ENVs in a Dockerfile.
+#
+# Here is a post from StackOverflow where someone asks a similar
+# question:
+# https://stackoverflow.com/questions/67596193/building-a-multi-architecture-docker-image-but-dockerfile-requires-different-pa
 ENV INSTALL_DEPS \
-    wget=1.21-1+b1
+    wget
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
     ${DEPS} ${INSTALL_DEPS}
