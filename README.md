@@ -111,20 +111,26 @@ on Docker Hub for a list of all the supported tags.
 
 There are no volumes.
 
-<!-- | Mount point | Purpose        | -->
-<!-- |-------------|----------------| -->
-<!-- | `/var/log`  |  Log storage   | -->
+<!--
+| Mount point | Purpose        |
+|-------------|----------------|
+| `/var/log`  |  Log storage   |
+-->
 
 ## Ports ##
 
 No ports are exposed by this container.
 
-<!-- | Port | Purpose        | -->
-<!-- |------|----------------| -->
-<!-- | 8080 | Example only; nothing is actually listening on the port | -->
+<!--
+| Port | Purpose        |
+|------|----------------|
+| 8080 | Example only; nothing is actually listening on the port |
+-->
 
-<!-- The sample [Docker composition](docker-compose.yml) publishes the -->
-<!-- exposed port at 8080. -->
+<!--
+The sample [Docker composition](docker-compose.yml) publishes the
+exposed port at 8080.
+-->
 
 ## Environment variables ##
 
@@ -142,9 +148,11 @@ There are no required environment variables.
 
 There are no required environment variables.
 
-<!-- | Name  | Purpose | Default | -->
-<!-- |-------|---------|---------| -->
-<!-- | `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` | -->
+<!--
+| Name  | Purpose | Default |
+|-------|---------|---------|
+| `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` |
+-->
 
 ## Secrets ##
 
