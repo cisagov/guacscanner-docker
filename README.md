@@ -25,7 +25,7 @@ composition](https://docs.docker.com/compose/) alongside only the
 To run the `cisagov/guacscanner` image via Docker:
 
 ```console
-docker run cisagov/guacscanner:0.0.1
+docker run cisagov/guacscanner:0.0.2
 ```
 
 ### Running with Docker Compose ###
@@ -82,7 +82,7 @@ Docker secrets.
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/guacscanner:0.0.1
+    docker pull cisagov/guacscanner:0.0.2
     ```
 
 1. Recreate and run the container by following the [previous
@@ -93,11 +93,11 @@ Docker secrets.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that
 they containerize.  It is recommended that most users use a version
-tag (e.g. `:0.0.1`).
+tag (e.g. `:0.0.2`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/guacscanner:0.0.1`| An exact release version. |
+|`cisagov/guacscanner:0.0.2`| An exact release version. |
 |`cisagov/guacscanner:0.0`| The most recent release matching the major and minor version numbers. |
 |`cisagov/guacscanner:0`| The most recent release matching the major version number. |
 |`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -164,8 +164,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=0.0.1 \
-  --tag cisagov/guacscanner:0.0.1 \
+  --build-arg VERSION=0.0.2 \
+  --tag cisagov/guacscanner:0.0.2 \
   https://github.com/cisagov/guacscanner.git#develop
 ```
 
@@ -195,9 +195,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=0.0.1 \
+      --build-arg VERSION=0.0.2 \
       --output type=docker \
-      --tag cisagov/guacscanner:0.0.1 .
+      --tag cisagov/guacscanner:0.0.2 .
     ```
 
 ## Contributing ##
