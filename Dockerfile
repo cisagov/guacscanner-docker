@@ -71,13 +71,15 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 ###
 ENV DEPS \
     libpq-dev=13.4-0+deb11u1
+# Note that we clean up aptitude cruft after installing dependencies.
+# This must be done in one fell swoop to actually reduce the size of
+# the resulting Docker image:
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
-    ${DEPS}
-
-# Clean up aptitude cruft
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+    ${DEPS} && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ###
 # Setup the unprivileged user and its home directory
