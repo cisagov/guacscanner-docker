@@ -53,11 +53,7 @@ ENV PATH="${PY_VENV}/bin:$PATH"
 RUN python -m pip install --upgrade pip setuptools wheel
 
 # Download and install guacscanner
-RUN wget -O sourcecode.tgz \
-    https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz && \
-    tar xzf sourcecode.tgz --strip-components=1 && \
-    python -m pip install --requirement requirements.txt && \
-    rm sourcecode.tgz
+RUN pip install --no-cache-dir https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
 
 FROM python:${PY_VERSION}-slim-bullseye AS build-stage
 
