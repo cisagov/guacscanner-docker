@@ -50,7 +50,7 @@ ENV PY_VENV=${CISA_HOME}/.venv
 RUN python -m venv ${PY_VENV}
 ENV PATH="${PY_VENV}/bin:$PATH"
 # Install/upgrade core Python dependencies
-RUN python -m pip install --upgrade pip setuptools wheel
+RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel
 
 # Download and install guacscanner
 RUN pip install --no-cache-dir https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
