@@ -39,9 +39,6 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} && \
 ###
 # Dependencies
 #
-# We need redis-tools so we can use redis-cli to communicate with
-# redis.  wget is used inside of gather-domains.sh.
-#
 # Install dependencies are only needed for software installation and
 # will be removed at the end of the build process.
 ###
@@ -49,15 +46,9 @@ ENV DEPS \
     libpq-dev
 ENV INSTALL_DEPS \
     wget
-# Temporary
-ENV TEMP_DEPS \
-    sudo \
-    vim
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests --yes \
-    ${DEPS} ${INSTALL_DEPS} ${TEMP_DEPS}
-# Temporary
-RUN echo ${CISA_USER}     "ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    ${DEPS} ${INSTALL_DEPS}
 
 WORKDIR ${CISA_HOME}
 
