@@ -84,4 +84,3 @@ RUN rm -rf /var/lib/apt/lists/*
 ###
 USER ${CISA_USER}:${CISA_GROUP}
 ENTRYPOINT ["guacscanner"]
-CMD ["--log-level", "DEBUG"]
