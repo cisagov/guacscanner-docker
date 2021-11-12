@@ -6,55 +6,40 @@
 
 ## Docker Image ##
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/example)](https://hub.docker.com/r/cisagov/example)
+[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
 [![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/guacscanner-docker/tags)
 
-This is a Docker skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub Docker project
-started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit hooks](https://pre-commit.com)
-and [GitHub Actions](https://github.com/features/actions) configurations
-appropriate for Docker containers and the major languages that we use.
+This project [Dockerizes](https://docker.com)
+[cisagov/guacscanner](https://github.com/cisagov/guacscanner), and the
+resulting Docker container is intended to run as a part of
+[cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition),
+although it could - probably uselessly - run in a [Docker
+composition](https://docs.docker.com/compose/) alongside only the
+[official PostgreSQL Docker image](https://hub.docker.com/_/postgres).
 
 ## Running ##
 
 ### Running with Docker ###
 
-To run the `cisagov/example` image via Docker:
+To run the `cisagov/guacscanner` image via Docker:
 
 ```console
-docker run cisagov/example:0.0.1
+docker run cisagov/guacscanner:1.0.0
 ```
 
 ### Running with Docker Compose ###
 
-1. Create a `docker-compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
+See
+[cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition))
+for an example of how to create a `docker-compose.yml` file to use
+[Docker Compose](https://docs.docker.com/compose/).  With a
+`docker-compose.yml` file in hand, one need only start the container
+and detach:
 
-    ```yaml
-    ---
-    version: "3.7"
-
-    services:
-      example:
-        image: cisagov/example:0.0.1
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
-        environment:
-          - ECHO_MESSAGE="Hello from docker-compose"
-        ports:
-          - target: 8080
-            published: 8080
-            protocol: tcp
-    ```
-
-1. Start the container and detach:
-
-    ```console
-    docker-compose up --detach
-    ```
+```console
+docker-compose up --detach
+```
 
 ## Using secrets with your container ##
 
@@ -64,39 +49,10 @@ values like your credentials can be more secure using secrets than using
 environment variables.  See the
 [secrets](#secrets) section below for a table of all supported secret files.
 
-1. To use secrets, create a `quote.txt` file containing the values you want set:
-
-    ```text
-    Better lock it in your pocket.
-    ```
-
-1. Then add the secret to your `docker-compose.yml` file:
-
-    ```yaml
-    ---
-    version: "3.7"
-
-    secrets:
-      quote_txt:
-        file: quote.txt
-
-    services:
-      example:
-        image: cisagov/example:0.0.1
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
-        environment:
-          - ECHO_MESSAGE="Hello from docker-compose"
-        ports:
-          - target: 8080
-            published: 8080
-            protocol: tcp
-        secrets:
-          - source: quote_txt
-            target: quote.txt
-    ```
+Again, see
+[cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition))
+for an example of how to create a `docker-compose.yml` file that uses
+Docker secrets.
 
 ## Updating your container ##
 
@@ -108,7 +64,8 @@ environment variables.  See the
     docker-compose pull
     ```
 
-1. Recreate the running container by following the [previous instructions](#running-with-docker-compose):
+1. Recreate the running container by following the [previous
+   instructions](#running-with-docker-compose):
 
     ```console
     docker-compose up --detach
@@ -125,46 +82,55 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/example:0.0.1
+    docker pull cisagov/guacscanner:1.0.0
     ```
 
-1. Recreate and run the container by following the [previous instructions](#running-with-docker).
+1. Recreate and run the container by following the [previous
+   instructions](#running-with-docker).
 
 ## Image tags ##
 
 The images of this container are tagged with [semantic
-versions](https://semver.org) of the underlying example project that they
-containerize.  It is recommended that most users use a version tag (e.g.
-`:0.0.1`).
+versions](https://semver.org) of the underlying example project that
+they containerize.  It is recommended that most users use a version
+tag (e.g. `:1.0.0`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/example:1.2.3`| An exact release version. |
-|`cisagov/example:1.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/example:1`| The most recent release matching the major version number. |
-|`cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
-|`cisagov/example:nightly` | A nightly build of the `develop` branch of this repository. |
-|`cisagov/example:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+|`cisagov/guacscanner:1.0.0`| An exact release version. |
+|`cisagov/guacscanner:0.0`| The most recent release matching the major and minor version numbers. |
+|`cisagov/guacscanner:0`| The most recent release matching the major version number. |
+|`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+|`cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
+|`cisagov/guacscanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
 
-See the [tags tab](https://hub.docker.com/r/cisagov/example/tags) on Docker
-Hub for a list of all the supported tags.
+See the [tags tab](https://hub.docker.com/r/cisagov/guacscanner/tags)
+on Docker Hub for a list of all the supported tags.
 
 ## Volumes ##
 
+There are no volumes.
+
+<!--
 | Mount point | Purpose        |
 |-------------|----------------|
 | `/var/log`  |  Log storage   |
+-->
 
 ## Ports ##
 
-The following ports are exposed by this container:
+No ports are exposed by this container.
 
+<!--
 | Port | Purpose        |
 |------|----------------|
 | 8080 | Example only; nothing is actually listening on the port |
+-->
 
+<!--
 The sample [Docker composition](docker-compose.yml) publishes the
 exposed port at 8080.
+-->
 
 ## Environment variables ##
 
@@ -180,15 +146,25 @@ There are no required environment variables.
 
 ### Optional ###
 
+There are no optional environment variables.
+
+<!--
 | Name  | Purpose | Default |
 |-------|---------|---------|
 | `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` |
+-->
 
 ## Secrets ##
 
 | Filename     | Purpose |
 |--------------|---------|
-| `quote.txt` | Replaces the secret stored in the example library's package data. |
+| postgres-username | Text file containing the username of the `postgres` user used by the `guacamole` container. |
+| postgres-password | Text file containing the password of the `postgres` user used by the `guacamole` container. |
+| private_ssh_key | Text file containing the private SSH key to use for SFTP file transfer in Guacamole. |
+| rdp_username | Text file containing the username for Guacamole to use when connecting to an instance via RDP. |
+| rdp_password | Text file containing the password for Guacamole to use when connecting to an instance via RDP. |
+| vnc_username | Text file containing the username for Guacamole to use when connecting to an instance via VNC. |
+| vnc_password | Text file containing the password for Guacamole to use when connecting to an instance via VNC. |
 
 ## Building from source ##
 
@@ -196,9 +172,9 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=0.0.1 \
-  --tag cisagov/example:0.0.1 \
-  https://github.com/cisagov/example.git#develop
+  --build-arg VERSION=1.0.0 \
+  --tag cisagov/guacscanner:1.0.0 \
+  https://github.com/cisagov/guacscanner.git#develop
 ```
 
 ## Cross-platform builds ##
@@ -211,8 +187,8 @@ Docker:
    or the command line:
 
     ```console
-    git clone https://github.com/cisagov/example.git
-    cd example
+    git clone https://github.com/cisagov/guacscanner.git
+    cd guacscanner
     ```
 
 1. Create the `Dockerfile-x` file with `buildx` platform support:
@@ -227,17 +203,10 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=0.0.1 \
+      --build-arg VERSION=1.0.0 \
       --output type=docker \
-      --tag cisagov/example:0.0.1 .
+      --tag cisagov/guacscanner:1.0.0 .
     ```
-
-## New repositories from a skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
 
 ## Contributing ##
 

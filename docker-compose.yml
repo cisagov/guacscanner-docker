@@ -4,34 +4,51 @@ version: "3.7"
 # This docker-compose file is used to build and test the container
 
 secrets:
-  quote_txt:
-    file: ./src/secrets/quote.txt
+  postgres_password:
+    file: ./src/secrets/postgres-password
+  postgres_username:
+    file: ./src/secrets/postgres-username
+  private_ssh_key:
+    file: ./src/secrets/private-ssh-key
+  rdp_password:
+    file: ./src/secrets/rdp-password
+  rdp_username:
+    file: ./src/secrets/rdp-username
+  vnc_password:
+    file: ./src/secrets/vnc-password
+  vnc_username:
+    file: ./src/secrets/vnc-username
 
 services:
-  example:
+  guacscanner:
     # Run the container normally
     build:
       # VERSION must be specified on the command line:
       # e.g., --build-arg VERSION=0.0.1
       context: .
       dockerfile: Dockerfile
-    image: cisagov/example
+    image: cisagov/guacscanner
     init: true
-    restart: "no"
-    environment:
-      - ECHO_MESSAGE=Hello World from docker-compose!
-    ports:
-      - target: 8080
-        published: 8080
-        protocol: tcp
-        mode: host
+    restart: always
     secrets:
-      - source: quote_txt
-        target: quote.txt
+      - source: postgres_password
+        target: postgres-password
+      - source: postgres_username
+        target: postgres-username
+      - source: private_ssh_key
+        target: private-ssh-key
+      - source: rdp_password
+        target: rdp-password
+      - source: rdp_username
+        target: rdp-username
+      - source: vnc_password
+        target: vnc-password
+      - source: vnc_username
+        target: vnc-username
 
-  example-version:
+  guacscanner-version:
     # Run the container to collect version information
-    image: cisagov/example
+    image: cisagov/guacscanner
     init: true
     restart: "no"
     command: --version
