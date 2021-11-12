@@ -16,7 +16,7 @@ ARG VERSION
 # will not be included in the final Docker image.
 ###
 ENV DEPS \
-    libpq-dev=13.4-0+deb11u1
+    libpq-dev=13.5-0+deb11u1
 # I'd like to pin the version of wget to keep the build reproducible,
 # but it's tricky.
 #
@@ -85,7 +85,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 # Dependencies
 ###
 ENV DEPS \
-    libpq-dev=13.4-0+deb11u1
+    libpq-dev=13.5-0+deb11u1
 # Note that we clean up aptitude cruft after installing dependencies.
 # This must be done in one fell swoop to actually reduce the size of
 # the resulting Docker image:
