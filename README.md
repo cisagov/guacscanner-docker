@@ -146,7 +146,7 @@ There are no required environment variables.
 
 ### Optional ###
 
-There are no required environment variables.
+There are no optional environment variables.
 
 <!--
 | Name  | Purpose | Default |
