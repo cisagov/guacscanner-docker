@@ -165,6 +165,7 @@ There are no optional environment variables.
 | rdp_password | Text file containing the password for Guacamole to use when connecting to an instance via RDP. |
 | vnc_username | Text file containing the username for Guacamole to use when connecting to an instance via VNC. |
 | vnc_password | Text file containing the password for Guacamole to use when connecting to an instance via VNC. |
+| windows_sftp_base | Text file containing the base path for the SFTP directories that Guacamole will use when connecting to a Windows instance via VNC. |
 
 ## Building from source ##
 
