@@ -18,6 +18,8 @@ secrets:
     file: ./src/secrets/vnc-password
   vnc_username:
     file: ./src/secrets/vnc-username
+  windows_sftp_base:
+    file: ./src/secrets/windows-sftp-base
 
 services:
   guacscanner:
@@ -45,6 +47,8 @@ services:
         target: vnc-password
       - source: vnc_username
         target: vnc-username
+      - source: windows_sftp_base
+        target: windows-sftp-base
 
   guacscanner-version:
     # Run the container to collect version information
