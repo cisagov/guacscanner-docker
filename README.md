@@ -25,7 +25,7 @@ composition](https://docs.docker.com/compose/) alongside only the
 To run the `cisagov/guacscanner` image via Docker:
 
 ```console
-docker run cisagov/guacscanner:1.0.0
+docker run cisagov/guacscanner:1.1.0
 ```
 
 ### Running with Docker Compose ###
@@ -82,7 +82,7 @@ Docker secrets.
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/guacscanner:1.0.0
+    docker pull cisagov/guacscanner:1.1.0
     ```
 
 1. Recreate and run the container by following the [previous
@@ -93,13 +93,13 @@ Docker secrets.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that
 they containerize.  It is recommended that most users use a version
-tag (e.g. `:1.0.0`).
+tag (e.g. `:1.1.0`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/guacscanner:1.0.0`| An exact release version. |
-|`cisagov/guacscanner:0.0`| The most recent release matching the major and minor version numbers. |
-|`cisagov/guacscanner:0`| The most recent release matching the major version number. |
+|`cisagov/guacscanner:1.1.0`| An exact release version. |
+|`cisagov/guacscanner:1.1`| The most recent release matching the major and minor version numbers. |
+|`cisagov/guacscanner:1`| The most recent release matching the major version number. |
 |`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 |`cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
 |`cisagov/guacscanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
@@ -158,13 +158,14 @@ There are no optional environment variables.
 
 | Filename     | Purpose |
 |--------------|---------|
-| postgres-username | Text file containing the username of the `postgres` user used by the `guacamole` container. |
-| postgres-password | Text file containing the password of the `postgres` user used by the `guacamole` container. |
+| postgres_username | Text file containing the username of the `postgres` user used by the `guacamole` container. |
+| postgres_password | Text file containing the password of the `postgres` user used by the `guacamole` container. |
 | private_ssh_key | Text file containing the private SSH key to use for SFTP file transfer in Guacamole. |
 | rdp_username | Text file containing the username for Guacamole to use when connecting to an instance via RDP. |
 | rdp_password | Text file containing the password for Guacamole to use when connecting to an instance via RDP. |
 | vnc_username | Text file containing the username for Guacamole to use when connecting to an instance via VNC. |
 | vnc_password | Text file containing the password for Guacamole to use when connecting to an instance via VNC. |
+| windows_sftp_base | Text file containing the base path for the SFTP directories that Guacamole will use when connecting to a Windows instance via VNC. |
 
 ## Building from source ##
 
@@ -172,8 +173,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=1.0.0 \
-  --tag cisagov/guacscanner:1.0.0 \
+  --build-arg VERSION=1.1.0 \
+  --tag cisagov/guacscanner:1.1.0 \
   https://github.com/cisagov/guacscanner.git#develop
 ```
 
@@ -203,9 +204,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=1.0.0 \
+      --build-arg VERSION=1.1.0 \
       --output type=docker \
-      --tag cisagov/guacscanner:1.0.0 .
+      --tag cisagov/guacscanner:1.1.0 .
     ```
 
 ## Contributing ##
