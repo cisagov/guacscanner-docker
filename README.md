@@ -38,7 +38,7 @@ for an example of how to create a `docker-compose.yml` file to use
 and detach:
 
 ```console
-docker-compose up --detach
+docker compose up --detach
 ```
 
 ## Using secrets with your container ##
@@ -61,14 +61,14 @@ Docker secrets.
 1. Pull the new image from Docker Hub:
 
     ```console
-    docker-compose pull
+    docker compose pull
     ```
 
 1. Recreate the running container by following the [previous
    instructions](#running-with-docker-compose):
 
     ```console
-    docker-compose up --detach
+    docker compose up --detach
     ```
 
 ### Docker ###
