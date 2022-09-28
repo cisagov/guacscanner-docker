@@ -1,5 +1,5 @@
 ARG VERSION=unspecified
-ARG PY_VERSION=3.10.0
+ARG PY_VERSION=3.10.7
 
 FROM python:${PY_VERSION}-slim-bullseye AS compile-stage
 
