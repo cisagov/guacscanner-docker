@@ -25,7 +25,7 @@ composition](https://docs.docker.com/compose/) alongside only the
 To run the `cisagov/guacscanner` image via Docker:
 
 ```console
-docker run cisagov/guacscanner:1.1.13
+docker run cisagov/guacscanner:1.1.14
 ```
 
 ### Running with Docker Compose ###
@@ -38,7 +38,7 @@ for an example of how to create a `docker-compose.yml` file to use
 and detach:
 
 ```console
-docker-compose up --detach
+docker compose up --detach
 ```
 
 ## Using secrets with your container ##
@@ -61,14 +61,14 @@ Docker secrets.
 1. Pull the new image from Docker Hub:
 
     ```console
-    docker-compose pull
+    docker compose pull
     ```
 
 1. Recreate the running container by following the [previous
    instructions](#running-with-docker-compose):
 
     ```console
-    docker-compose up --detach
+    docker compose up --detach
     ```
 
 ### Docker ###
@@ -82,7 +82,7 @@ Docker secrets.
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/guacscanner:1.1.13
+    docker pull cisagov/guacscanner:1.1.14
     ```
 
 1. Recreate and run the container by following the [previous
@@ -93,11 +93,11 @@ Docker secrets.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that
 they containerize.  It is recommended that most users use a version
-tag (e.g. `:1.1.13`).
+tag (e.g. `:1.1.14`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/guacscanner:1.1.13`| An exact release version. |
+|`cisagov/guacscanner:1.1.14`| An exact release version. |
 |`cisagov/guacscanner:1.1`| The most recent release matching the major and minor version numbers. |
 |`cisagov/guacscanner:1`| The most recent release matching the major version number. |
 |`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -173,8 +173,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=1.1.13 \
-  --tag cisagov/guacscanner:1.1.13 \
+  --build-arg VERSION=1.1.14 \
+  --tag cisagov/guacscanner:1.1.14 \
   https://github.com/cisagov/guacscanner.git#develop
 ```
 
@@ -204,9 +204,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=1.1.13 \
+      --build-arg VERSION=1.1.14 \
       --output type=docker \
-      --tag cisagov/guacscanner:1.1.13 .
+      --tag cisagov/guacscanner:1.1.14 .
     ```
 
 ## Contributing ##
