@@ -6,14 +6,37 @@ FROM python:${PY_VERSION}-slim-bullseye AS compile-stage
 ARG VERSION
 
 ###
-# Install everything we need
+# For a list of pre-defined annotation keys and value types see:
+# https://github.com/opencontainers/image-spec/blob/master/annotations.md
+#
+# Note: Additional labels are added by the build workflow.
 ###
+LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
+LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 ###
-# Dependencies
-#
-# Install dependencies are only needed for software installation and
-# will not be included in the final Docker image.
+# Unprivileged user setup variables
+###
+ARG CISA_UID=421
+ARG CISA_GID=${CISA_UID}
+ARG CISA_USER="cisa"
+ENV CISA_GROUP=${CISA_USER}
+ENV CISA_HOME="/home/${CISA_USER}"
+
+###
+# Upgrade the system
+###
+RUN apt-get update --quiet --quiet \
+    && apt-get upgrade --quiet --quiet
+
+###
+# Create unprivileged user
+###
+RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
+    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" ${CISA_USER}
+
+###
+# Install everything we need
 ###
 ENV DEPS \
     libpq-dev=13.8-0+deb11u1
@@ -34,33 +57,29 @@ ENV DEPS \
 # https://stackoverflow.com/questions/67596193/building-a-multi-architecture-docker-image-but-dockerfile-requires-different-pa
 ENV INSTALL_DEPS \
     wget
-RUN apt-get update && \
-    apt-get install --no-install-recommends --no-install-suggests --yes \
-    ${DEPS} ${INSTALL_DEPS}
+RUN apt-get install --quiet --quiet --yes \
+    --no-install-recommends --no-install-suggests \
+    $DEPS $INSTALL_DEPS
 
 ###
-# Setup the unprivileged user and its home directory
+# Make sure pip, setuptools, venv, and wheel are the latest versions
+#
+# Note that we use pip --no-cache-dir to avoid writing to a local
+# cache.  This results in a smaller final image, at the cost of
+# slightly longer install times.
 ###
-ARG CISA_GID=421
-ARG CISA_UID=${CISA_GID}
-ENV CISA_USER="cisa"
-ENV CISA_GROUP=${CISA_USER}
-ENV CISA_HOME="/home/cisa"
+RUN pip install --no-cache-dir --upgrade pip setuptools venv wheel
 
 ###
-# Create unprivileged user
-###
-RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} && \
-    useradd --system --create-home \
-    --uid ${CISA_UID} --gid ${CISA_GROUP} \
-    --comment "${CISA_USER} user" ${CISA_USER}
-
 # Perform remaining steps as the unprivileged user, from the
 # unprivileged user's home directory
+###
 USER ${CISA_USER}:${CISA_GROUP}
 WORKDIR ${CISA_HOME}
 
+###
 # Manually set up the virtual environment
+###
 ENV PY_VENV=${CISA_HOME}/.venv
 RUN python -m venv ${PY_VENV}
 ENV PATH="${PY_VENV}/bin:$PATH"
@@ -73,16 +92,41 @@ RUN python -m pip install --no-cache-dir --upgrade \
 # Download and install guacscanner
 RUN pip install --no-cache-dir https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
 
+
 FROM python:${PY_VERSION}-slim-bullseye AS build-stage
 
+###
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
+#
 # Note: Additional labels are added by the build workflow.
-LABEL org.opencontainers.image.authors="jeremy.frasier@cisa.dhs.gov"
+###
+LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 ###
-# Dependencies
+# Unprivileged user setup variables
+###
+ARG CISA_UID=421
+ARG CISA_GID=${CISA_UID}
+ARG CISA_USER="cisa"
+ENV CISA_GROUP=${CISA_USER}
+ENV CISA_HOME="/home/${CISA_USER}"
+
+###
+# Upgrade the system
+###
+RUN apt-get update --quiet --quiet \
+    && apt-get upgrade --quiet --quiet
+
+###
+# Create unprivileged user
+###
+RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
+    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" ${CISA_USER}
+
+###
+# Install everything we need
 ###
 ENV DEPS \
     libpq-dev=13.8-0+deb11u1
@@ -90,28 +134,11 @@ ENV DEPS \
 # This must be done in one fell swoop to actually reduce the size of
 # the resulting Docker image:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
-RUN apt-get update && \
-    apt-get install --no-install-recommends --no-install-suggests --yes \
-    ${DEPS} && \
+RUN apt-get install --quiet --quiet --yes \
+    --no-install-recommends --no-install-suggests \
+    $DEPS && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-###
-# Setup the unprivileged user and its home directory
-###
-ARG CISA_GID=421
-ARG CISA_UID=${CISA_GID}
-ENV CISA_USER="cisa"
-ENV CISA_GROUP=${CISA_USER}
-ENV CISA_HOME="/home/cisa"
-
-###
-# Create unprivileged user
-###
-RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} && \
-    useradd --system --create-home \
-    --uid ${CISA_UID} --gid ${CISA_GROUP} \
-    --comment "${CISA_USER} user" ${CISA_USER}
 
 # Manually set up the virtual environment, copying the venv over from
 # the compile stage
