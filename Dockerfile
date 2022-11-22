@@ -62,13 +62,13 @@ RUN apt-get install --quiet --quiet --yes \
     $DEPS $INSTALL_DEPS
 
 ###
-# Make sure pip, setuptools, venv, and wheel are the latest versions
+# Make sure pip, setuptools, and venv are the latest versions
 #
 # Note that we use pip --no-cache-dir to avoid writing to a local
 # cache.  This results in a smaller final image, at the cost of
 # slightly longer install times.
 ###
-RUN pip install --no-cache-dir --upgrade pip setuptools venv wheel
+RUN pip install --no-cache-dir --upgrade pip setuptools venv
 
 ###
 # Perform remaining steps as the unprivileged user, from the
