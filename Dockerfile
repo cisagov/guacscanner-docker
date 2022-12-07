@@ -136,9 +136,9 @@ ENV DEPS \
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
-    $DEPS && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    $DEPS \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Manually set up the virtual environment, copying the venv over from
 # the compile stage
