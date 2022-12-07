@@ -37,6 +37,9 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 
 ###
 # Install everything we need
+#
+# Install dependencies are only needed for software installation and
+# will not be included in the final Docker image.
 ###
 ENV DEPS \
     libpq-dev=13.8-0+deb11u1
