@@ -150,7 +150,7 @@ COPY --from=compile-stage ${CISA_HOME} ${CISA_HOME}/
 ENV PATH="${PY_VENV}/bin:$PATH"
 
 ###
-# Prepare to Run
+# Prepare to run
 ###
 USER ${CISA_USER}:${CISA_GROUP}
 WORKDIR ${CISA_HOME}
