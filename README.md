@@ -1,4 +1,4 @@
-# guacscanner-docker 💀🐳 #
+# guacscanner-docker #
 
 [![GitHub Build Status](https://github.com/cisagov/guacscanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/guacscanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/codeql-analysis.yml)
@@ -8,7 +8,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/guacscanner-docker/tags)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/guacscanner/tags)
 
 This project [Dockerizes](https://docker.com)
 [cisagov/guacscanner](https://github.com/cisagov/guacscanner), and the
@@ -25,7 +25,7 @@ composition](https://docs.docker.com/compose/) alongside only the
 To run the `cisagov/guacscanner` image via Docker:
 
 ```console
-docker run cisagov/guacscanner:1.1.15
+docker run cisagov/guacscanner:1.1.16
 ```
 
 ### Running with Docker Compose ###
@@ -82,7 +82,7 @@ Docker secrets.
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/guacscanner:1.1.15
+    docker pull cisagov/guacscanner:1.1.16
     ```
 
 1. Recreate and run the container by following the [previous
@@ -93,11 +93,11 @@ Docker secrets.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that
 they containerize.  It is recommended that most users use a version
-tag (e.g. `:1.1.15`).
+tag (e.g. `:1.1.16`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/guacscanner:1.1.15`| An exact release version. |
+|`cisagov/guacscanner:1.1.16`| An exact release version. |
 |`cisagov/guacscanner:1.1`| The most recent release matching the major and minor version numbers. |
 |`cisagov/guacscanner:1`| The most recent release matching the major version number. |
 |`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -173,8 +173,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=1.1.15 \
-  --tag cisagov/guacscanner:1.1.15 \
+  --build-arg VERSION=1.1.16 \
+  --tag cisagov/guacscanner:1.1.16 \
   https://github.com/cisagov/guacscanner.git#develop
 ```
 
@@ -204,9 +204,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=1.1.15 \
+      --build-arg VERSION=1.1.16 \
       --output type=docker \
-      --tag cisagov/guacscanner:1.1.15 .
+      --tag cisagov/guacscanner:1.1.16 .
     ```
 
 ## Contributing ##
