@@ -87,10 +87,10 @@ WORKDIR ${CISA_HOME}
 # Manually set up the virtual environment
 ###
 ENV PY_VENV=${CISA_HOME}/.venv
-RUN python -m venv ${PY_VENV}
+RUN python3 -m venv ${PY_VENV}
 ENV PATH="${PY_VENV}/bin:$PATH"
 # Install/upgrade core Python dependencies
-RUN python -m pip install --no-cache-dir --upgrade \
+RUN python3 -m pip install --no-cache-dir --upgrade \
     pip==21.3.1 \
     setuptools==58.5.3 \
     wheel==0.37.0
