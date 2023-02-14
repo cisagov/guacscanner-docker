@@ -96,7 +96,8 @@ RUN python3 -m pip install --no-cache-dir --upgrade \
     wheel==0.37.0
 
 # Download and install guacscanner
-RUN pip install --no-cache-dir https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
+RUN python3 -m pip install --no-cache-dir \
+    https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
 
 
 FROM python:${PY_VERSION}-slim-bullseye AS build-stage
