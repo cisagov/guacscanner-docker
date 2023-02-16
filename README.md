@@ -151,7 +151,7 @@ There are no optional environment variables.
 <!--
 | Name  | Purpose | Default |
 |-------|---------|---------|
-| `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` |
+| `OPTIONAL_VARIABLE` | Describe its purpose. | `null` |
 -->
 
 ## Secrets ##
