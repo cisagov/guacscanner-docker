@@ -65,13 +65,16 @@ RUN apt-get install --quiet --quiet --yes \
     $DEPS $INSTALL_DEPS
 
 ###
-# Make sure pip and setuptools are the latest versions
+# Make sure pip, setuptools, and wheel are the latest versions
 #
-# Note that we use pip --no-cache-dir to avoid writing to a local
+# Note that we use pip3 --no-cache-dir to avoid writing to a local
 # cache.  This results in a smaller final image, at the cost of
 # slightly longer install times.
 ###
-RUN pip install --no-cache-dir --upgrade pip setuptools
+RUN pip3 install --no-cache-dir --upgrade \
+    pip \
+    setuptools \
+    wheel
 
 ###
 # Perform remaining steps as the unprivileged user, from the
@@ -84,16 +87,17 @@ WORKDIR ${CISA_HOME}
 # Manually set up the virtual environment
 ###
 ENV PY_VENV=${CISA_HOME}/.venv
-RUN python -m venv ${PY_VENV}
+RUN python3 -m venv ${PY_VENV}
 ENV PATH="${PY_VENV}/bin:$PATH"
 # Install/upgrade core Python dependencies
-RUN python -m pip install --no-cache-dir --upgrade \
+RUN python3 -m pip install --no-cache-dir --upgrade \
     pip==21.3.1 \
     setuptools==58.5.3 \
     wheel==0.37.0
 
 # Download and install guacscanner
-RUN pip install --no-cache-dir https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
+RUN python3 -m pip install --no-cache-dir \
+    https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
 
 
 FROM python:${PY_VERSION}-slim-bullseye AS build-stage
