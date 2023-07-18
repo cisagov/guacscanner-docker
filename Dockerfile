@@ -1,7 +1,11 @@
 ARG VERSION=unspecified
 ARG PY_VERSION=3.10.7
 
+<<<<<<< HEAD
 FROM python:${PY_VERSION}-slim-bullseye AS compile-stage
+=======
+FROM python:3.11.4-alpine
+>>>>>>> 8c26a61517f4254b82bb73a78544145c62828a89
 
 ARG VERSION
 
