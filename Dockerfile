@@ -42,7 +42,7 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # will not be included in the final Docker image.
 ###
 ENV DEPS \
-    libpq-dev=13.11-0+deb11u1
+    libpq-dev=13.13-0+deb11u1
 # I'd like to pin the version of wget to keep the build reproducible,
 # but it's tricky.
 #
@@ -136,7 +136,7 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # Install everything we need
 ###
 ENV DEPS \
-    libpq-dev=13.11-0+deb11u1
+    libpq-dev=13.13-0+deb11u1
 # Note that we clean up aptitude cruft after installing dependencies.
 # This must be done in one fell swoop to actually reduce the size of
 # the resulting Docker image:
