@@ -3,6 +3,11 @@
 FROM docker.io/library/python:3.10.7-slim-bullseye AS compile-stage
 
 ###
+# Cross-platform build variables
+###
+ARG TARGETPLATFORM
+
+###
 # Unprivileged user variables
 ###
 ARG CISA_USER="cisa"
@@ -23,7 +28,12 @@ ENV PYTHON_WHEEL_VERSION=0.45.1
 ###
 RUN apt-get update --quiet --quiet \
     && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
-        libpq-dev=13.13-0+deb11u1
+        libpq-dev=$( \
+            if [ "${TARGETPLATFORM}" = "linux/ppc64le" ] || [ "${TARGETPLATFORM}" = "linux/s390x" ]; then \
+                echo "13.16-0+deb11u1"; \
+            else \
+                echo "13.19-0+deb11u1"; \
+            fi)
 
 ###
 # Install the specified versions of pip, setuptools, and wheel into the system
@@ -75,6 +85,11 @@ LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 ###
+# Cross-platform build variables
+###
+ARG TARGETPLATFORM
+
+###
 # Unprivileged user setup variables
 ###
 ARG CISA_UID=421
@@ -99,7 +114,12 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get update --quiet --quiet \
     && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
-        libpq-dev=13.13-0+deb11u1 \
+        libpq-dev=$( \
+            if [ "${TARGETPLATFORM}" = "linux/ppc64le" ] || [ "${TARGETPLATFORM}" = "linux/s390x" ]; then \
+                echo "13.16-0+deb11u1"; \
+            else \
+                echo "13.19-0+deb11u1"; \
+            fi) \
     && apt-get clean \
     && rm --recursive --force /var/lib/apt/lists/*
 
