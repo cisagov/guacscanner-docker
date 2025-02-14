@@ -36,7 +36,8 @@ ENV PYTHON_WHEEL_VERSION=0.45.1
 # Here is a post from StackOverflow where someone asks a similar
 # question:
 # https://stackoverflow.com/questions/67596193/building-a-multi-architecture-docker-image-but-dockerfile-requires-different-pa
-RUN apt-get install --quiet --quiet --yes \
+RUN apt-get update --quiet --quiet \
+    && apt-get install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
     libpq-dev=13.13-0+deb11u1 \
     wget
@@ -101,12 +102,6 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 ###
-# Upgrade the system
-###
-RUN apt-get update --quiet --quiet \
-    && apt-get upgrade --quiet --quiet
-
-###
 # Create unprivileged user
 ###
 RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
@@ -119,7 +114,8 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # This must be done in one fell swoop to actually reduce the size of
 # the resulting Docker image:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
-RUN apt-get install --quiet --quiet --yes \
+RUN apt-get update --quiet --quiet \
+    && apt-get install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
     libpq-dev=13.13-0+deb11u1 \
     && apt-get clean \
