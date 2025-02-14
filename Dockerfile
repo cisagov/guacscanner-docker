@@ -1,11 +1,6 @@
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:3.10.7-slim-bullseye AS compile-stage
-
-###
-# Cross-platform build variables
-###
-ARG TARGETPLATFORM
+FROM docker.io/library/python:3.10.16-slim-bookworm AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -28,12 +23,7 @@ ENV PYTHON_WHEEL_VERSION=0.45.1
 ###
 RUN apt-get update --quiet --quiet \
     && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
-        libpq-dev=$( \
-            if [ "${TARGETPLATFORM}" = "linux/ppc64le" ] || [ "${TARGETPLATFORM}" = "linux/s390x" ]; then \
-                echo "13.16-0+deb11u1"; \
-            else \
-                echo "13.19-0+deb11u1"; \
-            fi)
+        libpq-dev=15.10-0+deb12u1
 
 ###
 # Install the specified versions of pip, setuptools, and wheel into the system
@@ -73,7 +63,7 @@ RUN pipenv check --verbose \
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:3.10.7-slim-bullseye AS build-stage
+FROM docker.io/library/python:3.10.16-slim-bookworm AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -83,11 +73,6 @@ FROM docker.io/library/python:3.10.7-slim-bullseye AS build-stage
 ###
 LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
-
-###
-# Cross-platform build variables
-###
-ARG TARGETPLATFORM
 
 ###
 # Unprivileged user setup variables
@@ -114,12 +99,7 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get update --quiet --quiet \
     && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
-        libpq-dev=$( \
-            if [ "${TARGETPLATFORM}" = "linux/ppc64le" ] || [ "${TARGETPLATFORM}" = "linux/s390x" ]; then \
-                echo "13.16-0+deb11u1"; \
-            else \
-                echo "13.19-0+deb11u1"; \
-            fi) \
+        libpq-dev=15.10-0+deb12u1 \
     && apt-get clean \
     && rm --recursive --force /var/lib/apt/lists/*
 
