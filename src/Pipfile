@@ -6,8 +6,8 @@ name = "pypi"
 # List any Python dependencies for the image here
 [packages]
 # This should match the version of the image
-example = {file = "https://github.com/cisagov/skeleton-python-library/archive/v0.2.0.tar.gz"}
+guacscanner = {file = "https://github.com/cisagov/guacscanner/archive/v1.1.18.tar.gz"}
 
 # This version should match the version of Python in the image
 [requires]
-python_full_version = "3.13.2"
+python_full_version = "3.10.7"
