@@ -37,10 +37,9 @@ ENV PYTHON_WHEEL_VERSION=0.45.1
 # question:
 # https://stackoverflow.com/questions/67596193/building-a-multi-architecture-docker-image-but-dockerfile-requires-different-pa
 RUN apt-get update --quiet --quiet \
-    && apt-get install --quiet --quiet --yes \
-    --no-install-recommends --no-install-suggests \
-    libpq-dev=13.13-0+deb11u1 \
-    wget
+    && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
+        libpq-dev=13.13-0+deb11u1 \
+        wget
 
 ###
 # Install the specified versions of pip, setuptools, and wheel into the system
@@ -115,9 +114,8 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # the resulting Docker image:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get update --quiet --quiet \
-    && apt-get install --quiet --quiet --yes \
-    --no-install-recommends --no-install-suggests \
-    libpq-dev=13.13-0+deb11u1 \
+    && apt-get install --quiet --quiet --yes --no-install-recommends --no-install-suggests \
+        libpq-dev=13.13-0+deb11u1 \
     && apt-get clean \
     && rm --recursive --force /var/lib/apt/lists/*
 
