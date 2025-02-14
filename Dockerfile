@@ -1,39 +1,19 @@
-ARG VERSION=unspecified
-ARG PY_VERSION=3.10.7
-
-FROM python:${PY_VERSION}-slim-bullseye AS compile-stage
-
-ARG VERSION
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:3.10.7-slim-bullseye AS compile-stage
 
 ###
-# For a list of pre-defined annotation keys and value types see:
-# https://github.com/opencontainers/image-spec/blob/master/annotations.md
-#
-# Note: Additional labels are added by the build workflow.
+# Unprivileged user variables
 ###
-LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
-LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
-
-###
-# Unprivileged user setup variables
-###
-ARG CISA_UID=421
-ARG CISA_GID=${CISA_UID}
 ARG CISA_USER="cisa"
-ENV CISA_GROUP=${CISA_USER}
 ENV CISA_HOME="/home/${CISA_USER}"
+ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
-###
-# Upgrade the system
-###
-RUN apt-get update --quiet --quiet \
-    && apt-get upgrade --quiet --quiet
-
-###
-# Create unprivileged user
-###
-RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
-    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" ${CISA_USER}
+# Versions of the Python packages installed directly
+ENV PYTHON_PIP_VERSION=25.0.1
+ENV PYTHON_PIPENV_VERSION=2024.4.1
+ENV PYTHON_SETUPTOOLS_VERSION=75.8.0
+ENV PYTHON_WHEEL_VERSION=0.45.1
 
 ###
 # Install everything we need
@@ -41,8 +21,6 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # Install dependencies are only needed for software installation and
 # will not be included in the final Docker image.
 ###
-ENV DEPS \
-    libpq-dev=13.13-0+deb11u1
 # I'd like to pin the version of wget to keep the build reproducible,
 # but it's tricky.
 #
@@ -58,49 +36,50 @@ ENV DEPS \
 # Here is a post from StackOverflow where someone asks a similar
 # question:
 # https://stackoverflow.com/questions/67596193/building-a-multi-architecture-docker-image-but-dockerfile-requires-different-pa
-ENV INSTALL_DEPS \
-    wget
 RUN apt-get install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
-    $DEPS $INSTALL_DEPS
+    libpq-dev=13.13-0+deb11u1 \
+    wget
 
 ###
-# Make sure pip, setuptools, and wheel are the latest versions
+# Install the specified versions of pip, setuptools, and wheel into the system
+# Python environment; install the specified version of pipenv into the system Python
+# environment; set up a Python virtual environment (venv); and install the specified
+# versions of pip, setuptools, and wheel into the venv.
 #
-# Note that we use pip3 --no-cache-dir to avoid writing to a local
+# Note that we use the --no-cache-dir flag to avoid writing to a local
 # cache.  This results in a smaller final image, at the cost of
 # slightly longer install times.
 ###
-RUN pip3 install --no-cache-dir --upgrade \
-    pip \
-    setuptools \
-    wheel
-
-###
-# Perform remaining steps as the unprivileged user, from the
-# unprivileged user's home directory
-###
-USER ${CISA_USER}:${CISA_GROUP}
-WORKDIR ${CISA_HOME}
-
-###
-# Manually set up the virtual environment
-###
-ENV PY_VENV=${CISA_HOME}/.venv
-RUN python3 -m venv ${PY_VENV}
-ENV PATH="${PY_VENV}/bin:$PATH"
-# Install/upgrade core Python dependencies
 RUN python3 -m pip install --no-cache-dir --upgrade \
-    pip==21.3.1 \
-    setuptools==58.5.3 \
-    wheel==0.37.0
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+        wheel==${PYTHON_WHEEL_VERSION} \
+    && python3 -m pip install --no-cache-dir --upgrade \
+        pipenv==${PYTHON_PIPENV_VERSION} \
+    # Manually create the virtual environment
+    && python3 -m venv ${VIRTUAL_ENV} \
+    # Ensure the core Python packages are installed in the virtual environment
+    && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+        wheel==${PYTHON_WHEEL_VERSION}
 
-# Download and install guacscanner
-RUN python3 -m pip install --no-cache-dir \
-    https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
+###
+# Check the Pipfile configuration and then install the Python dependencies into
+# the virtual environment.
+#
+# Note that pipenv will install into a virtual environment if the VIRTUAL_ENV
+# environment variable is set.
+###
+WORKDIR /tmp
+COPY src/Pipfile src/Pipfile.lock ./
+RUN pipenv check --verbose \
+    && pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
-
-FROM python:${PY_VERSION}-slim-bullseye AS build-stage
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:3.10.7-slim-bullseye AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -119,6 +98,7 @@ ARG CISA_GID=${CISA_UID}
 ARG CISA_USER="cisa"
 ENV CISA_GROUP=${CISA_USER}
 ENV CISA_HOME="/home/${CISA_USER}"
+ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 ###
 # Upgrade the system
@@ -135,27 +115,32 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 ###
 # Install everything we need
 ###
-ENV DEPS \
-    libpq-dev=13.13-0+deb11u1
 # Note that we clean up aptitude cruft after installing dependencies.
 # This must be done in one fell swoop to actually reduce the size of
 # the resulting Docker image:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN apt-get install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
-    $DEPS \
+    libpq-dev=13.13-0+deb11u1 \
     && apt-get clean \
     && rm --recursive --force /var/lib/apt/lists/*
 
-# Manually set up the virtual environment, copying the venv over from
-# the compile stage
-ENV PY_VENV=${CISA_HOME}/.venv
-COPY --from=compile-stage ${CISA_HOME} ${CISA_HOME}/
-ENV PATH="${PY_VENV}/bin:$PATH"
+###
+# Copy in the Python virtual environment created in compile-stage, symlink the
+# Python binary in the venv to the system-wide Python, and add the venv to the PATH.
+#
+# Note that we symlink the Python binary in the venv to the system-wide Python so that
+# any calls to `python3` will use our virtual environment. We are using short flags
+# because the ln binary in Alpine Linux does not support long flags. The -f instructs
+# ln to remove the existing file and the -s instructs ln to create a symbolic link.
+###
+COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+RUN ln --force --symbolic "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
+ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 ###
 # Prepare to run
 ###
-USER ${CISA_USER}:${CISA_GROUP}
 WORKDIR ${CISA_HOME}
+USER ${CISA_USER}:${CISA_GROUP}
 ENTRYPOINT ["guacscanner"]

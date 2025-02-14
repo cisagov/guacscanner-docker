@@ -1,7 +1,7 @@
 ---
-version: "3.7"
-
 # This Docker composition file is used to build and test the container
+
+name: skeleton-docker
 
 secrets:
   postgres_password:
@@ -52,7 +52,7 @@ services:
 
   guacscanner-version:
     # Run the container to collect version information
+    command: --version
     image: cisagov/guacscanner
     init: true
     restart: "no"
-    command: --version
