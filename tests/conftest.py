@@ -6,6 +6,7 @@ https://docs.pytest.org/en/latest/writing_plugins.html#conftest-py-plugins
 # Third-Party Libraries
 import pytest
 from python_on_whales import docker
+from semver import parse_version_info
 
 MAIN_SERVICE_NAME = "guacscanner"
 VERSION_SERVICE_NAME = f"{MAIN_SERVICE_NAME}-version"
@@ -42,7 +43,7 @@ def version_container(dockerc):
 def project_version():
     """Return the version of the project."""
     with open(VERSION_FILE) as f:
-        project_version = f.read().strip()
+        project_version = parse_version_info(f.read().strip())
     return project_version
 
 
