@@ -85,12 +85,10 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
 # Python binary in the venv to the system-wide Python, and add the venv to the PATH.
 #
 # Note that we symlink the Python binary in the venv to the system-wide Python so that
-# any calls to `python3` will use our virtual environment. We are using short flags
-# because the ln binary in Alpine Linux does not support long flags. The -f instructs
-# ln to remove the existing file and the -s instructs ln to create a symbolic link.
+# any calls to `python3` will use our virtual environment.
 ###
 COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-RUN ln -fs "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
+RUN ln --force --symbolic "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 ###
