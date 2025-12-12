@@ -2,13 +2,12 @@
 
 [![GitHub Build Status](https://github.com/cisagov/guacscanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/guacscanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/guacscanner-docker/badge.svg)](https://snyk.io/test/github/cisagov/guacscanner-docker)
 
 ## Docker Image ##
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/guacscanner)](https://hub.docker.com/r/cisagov/guacscanner)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/guacscanner/tags)
+[![Platforms](https://img.shields.io/badge/platforms-386%20%7C%20amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20riscv64%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/guacscanner/tags)
 
 This project [Dockerizes](https://docker.com)
 [cisagov/guacscanner](https://github.com/cisagov/guacscanner), and the
@@ -32,10 +31,9 @@ docker run cisagov/guacscanner:1.1.18
 
 See
 [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition))
-for an example of how to create a `docker-compose.yml` file to use
-[Docker Compose](https://docs.docker.com/compose/).  With a
-`docker-compose.yml` file in hand, one need only start the container
-and detach:
+for an example of how to create a `compose.yml` file to use [Docker
+Compose](https://docs.docker.com/compose/).  With a `compose.yml` file
+in hand, one need only start the container and detach:
 
 ```console
 docker compose up --detach
@@ -51,8 +49,8 @@ environment variables.  See the
 
 Again, see
 [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition))
-for an example of how to create a `docker-compose.yml` file that uses
-Docker secrets.
+for an example of how to create a `compose.yml` file that uses Docker
+secrets.
 
 ## Updating your container ##
 
@@ -87,6 +85,35 @@ Docker secrets.
 
 1. Recreate and run the container by following the [previous
    instructions](#running-with-docker).
+
+## Updating Python dependencies ##
+
+This image uses [Pipenv] to manage Python dependencies using a [Pipfile](https://github.com/pypa/pipfile).
+Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfile`
+will result in a modified `src/Pipfile.lock` file that should be committed to the
+repository.
+
+> [!WARNING]
+> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
+
+### Updating dependencies ###
+
+If you want to update existing dependencies you would run the following command
+in the `src/` subdirectory:
+
+```console
+pipenv lock
+```
+
+### Modifying dependencies ###
+
+If you want to add or remove dependencies you would update the `src/Pipfile` file
+and then update dependencies as you would above.
+
+> [!NOTE]
+> You should only specify packages that are direct requirements of
+> your Docker configuration. Allow [Pipenv] to manage the dependencies
+> of the specified packages.
 
 ## Image tags ##
 
@@ -128,7 +155,7 @@ No ports are exposed by this container.
 -->
 
 <!--
-The sample [Docker composition](docker-compose.yml) publishes the
+The sample [Docker composition](compose.yml) publishes the
 exposed port at 8080.
 -->
 
@@ -226,3 +253,5 @@ dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 All contributions to this project will be released under the CC0
 dedication. By submitting a pull request, you are agreeing to comply
 with this waiver of copyright interest.
+
+[Pipenv]: https://pypi.org/project/pipenv/
