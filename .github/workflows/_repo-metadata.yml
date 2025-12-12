@@ -42,19 +42,23 @@ jobs:
               {
                   "description": "The name of the Docker image.",
                   "name": "image-name",
-                  "value": "cisagov/example",
+                  "value": "cisagov/guacscanner",
               },
               {
                   "description": "The supported platforms for the Docker image.",
                   "name": "image-platforms",
                   "value": [
+                      # The base Docker image we are using does not
+                      # support the ARMv6 or RISCv64 hardware
+                      # platforms:
+                      # https://hub.docker.com/_/python/tags?name=3.10.7-slim-bullseye
                       "linux/386",
                       "linux/amd64",
-                      "linux/arm/v6",
+                      # "linux/arm/v6",
                       "linux/arm/v7",
                       "linux/arm64",
                       "linux/ppc64le",
-                      "linux/riscv64",
+                      # "linux/riscv64",
                       "linux/s390x",
                   ],
               },
