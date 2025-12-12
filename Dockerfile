@@ -81,21 +81,6 @@ RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
     && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" ${CISA_USER}
 
 ###
-# Install everything we need
-###
-ENV DEPS \
-    libpq-dev=13.13-0+deb11u1
-# Note that we clean up aptitude cruft after installing dependencies.
-# This must be done in one fell swoop to actually reduce the size of
-# the resulting Docker image:
-# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
-# RUN apt-get install --quiet --quiet --yes \
-#     --no-install-recommends --no-install-suggests \
-#     $DEPS \
-#     && apt-get clean \
-#     && rm --recursive --force /var/lib/apt/lists/*
-
-###
 # Copy in the Python virtual environment created in compile-stage, symlink the
 # Python binary in the venv to the system-wide Python, and add the venv to the PATH.
 #
