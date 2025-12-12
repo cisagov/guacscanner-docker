@@ -1,7 +1,9 @@
 ARG VERSION=unspecified
 ARG PY_VERSION=3.10.7
 
-FROM python:${PY_VERSION}-slim-bullseye AS compile-stage
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS compile-stage
 
 ARG VERSION
 
@@ -99,8 +101,9 @@ RUN python3 -m pip install --no-cache-dir --upgrade \
 RUN python3 -m pip install --no-cache-dir \
     https://github.com/cisagov/guacscanner/archive/v${VERSION}.tar.gz
 
-
-FROM python:${PY_VERSION}-slim-bullseye AS build-stage
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
