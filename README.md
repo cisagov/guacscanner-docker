@@ -200,7 +200,6 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=1.2.0-rc.1 \
   --tag cisagov/guacscanner:1.2.0-rc.1 \
   https://github.com/cisagov/guacscanner.git#develop
 ```
@@ -231,7 +230,6 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=1.2.0-rc.1 \
       --output type=docker \
       --tag cisagov/guacscanner:1.2.0-rc.1 .
     ```
