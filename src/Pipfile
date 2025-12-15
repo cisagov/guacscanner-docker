@@ -1,0 +1,12 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+# List any Python dependencies for the image here
+[packages]
+guacscanner = {file = "https://github.com/cisagov/guacscanner/archive/v3.0.0.tar.gz"}
+
+# This version should match the version of Python in the image
+[requires]
+python_full_version = "3.10.7"
