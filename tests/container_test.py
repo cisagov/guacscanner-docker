@@ -62,14 +62,15 @@ def test_wait_for_exits(dockerc, main_container, version_container):
 #         RELEASE_TAG == f"v{project_version}"
 #     ), "RELEASE_TAG does not match the project version"
 
+
 # The version of this container and the cisagov/guacscanner version do
 # not match.
 # def test_log_version(dockerc, project_version, version_container):
 #     """Verify the container outputs the correct version to the logs."""
 #     # make sure container exited if running test isolated
 #     dockerc.wait(version_container.id)
-#     log_version = parse_version_info(version_container.logs().strip())
-#     assert log_version == parse_version_info(
+#     log_version = semver.version.Version.parse(version_container.logs().strip())
+#     assert log_version == semver.version.Version.parse(
 #         project_version
 #     ), f"Container version output to log does not match project version file {VERSION_FILE}"
 
