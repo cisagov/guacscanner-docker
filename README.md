@@ -1,6 +1,7 @@
 # guacscanner-docker #
 
 [![GitHub Build Status](https://github.com/cisagov/guacscanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/build.yml)
+[![License](https://img.shields.io/github/license/cisagov/guacscanner-docker)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/guacscanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/guacscanner-docker/actions/workflows/codeql-analysis.yml)
 
 ## Docker Image ##
