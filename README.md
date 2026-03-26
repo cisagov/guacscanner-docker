@@ -94,9 +94,6 @@ Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfi
 will result in a modified `src/Pipfile.lock` file that should be committed to the
 repository.
 
-> [!WARNING]
-> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
-
 ### Updating dependencies ###
 
 If you want to update existing dependencies you would run the following command
@@ -124,13 +121,13 @@ they containerize.  It is recommended that most users use a version
 tag (e.g. `:1.2.0`).
 
 | Image:tag | Description |
-|-----------|-------------|
-|`cisagov/guacscanner:1.2.0`| An exact release version. |
-|`cisagov/guacscanner:1.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/guacscanner:1`| The most recent release matching the major version number. |
-|`cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
-|`cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
-|`cisagov/guacscanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+| --------- | ----------- |
+| `cisagov/guacscanner:1.2.0` | An exact release version. |
+| `cisagov/guacscanner:1.2` | The most recent release matching the major and minor version numbers. |
+| `cisagov/guacscanner:1` | The most recent release matching the major version number. |
+| `cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+| `cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
+| `cisagov/guacscanner:latest` | The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
 
 See the [tags tab](https://hub.docker.com/r/cisagov/guacscanner/tags)
 on Docker Hub for a list of all the supported tags.
@@ -141,7 +138,7 @@ There are no volumes.
 
 <!--
 | Mount point | Purpose        |
-|-------------|----------------|
+| ----------- | -------------- |
 | `/var/log`  |  Log storage   |
 -->
 
@@ -150,8 +147,8 @@ There are no volumes.
 No ports are exposed by this container.
 
 <!--
-| Port | Purpose        |
-|------|----------------|
+| Port | Purpose |
+| ---- | ------- |
 | 8080 | Example only; nothing is actually listening on the port |
 -->
 
@@ -168,7 +165,7 @@ There are no required environment variables.
 
 <!--
 | Name  | Purpose | Default |
-|-------|---------|---------|
+| ----- | ------- | ------- |
 | `REQUIRED_VARIABLE` | Describe its purpose. | `null` |
 -->
 
@@ -177,15 +174,15 @@ There are no required environment variables.
 There are no optional environment variables.
 
 <!--
-| Name  | Purpose | Default |
-|-------|---------|---------|
+| Name | Purpose | Default |
+| ---- | ------- | ------- |
 | `OPTIONAL_VARIABLE` | Describe its purpose. | `null` |
 -->
 
 ## Secrets ##
 
-| Filename     | Purpose |
-|--------------|---------|
+| Filename | Purpose |
+| -------- | ------- |
 | postgres_username | Text file containing the username of the `postgres` user used by the `guacamole` container. |
 | postgres_password | Text file containing the password of the `postgres` user used by the `guacamole` container. |
 | private_ssh_key | Text file containing the private SSH key to use for SFTP file transfer in Guacamole. |
