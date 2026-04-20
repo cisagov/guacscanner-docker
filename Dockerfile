@@ -1,8 +1,8 @@
-ARG PY_VERSION=3.10.7
+ARG PY_VERSION=3.14.4
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS compile-stage
+FROM docker.io/library/python:${PY_VERSION}-slim-trixie AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -50,7 +50,7 @@ RUN pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS build-stage
+FROM docker.io/library/python:${PY_VERSION}-slim-trixie AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
