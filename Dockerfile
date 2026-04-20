@@ -13,8 +13,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
 ENV PYTHON_PIP_VERSION=26.0.1
-ENV PYTHON_PIPENV_VERSION=2026.0.3
-ENV PYTHON_SETUPTOOLS_VERSION=82.0.0
+ENV PYTHON_PIPENV_VERSION=2026.5.2
+ENV PYTHON_SETUPTOOLS_VERSION=82.0.1
 
 ###
 # Install the specified versions of pip and setuptools into the system
