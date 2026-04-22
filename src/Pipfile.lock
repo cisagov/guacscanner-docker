@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b3905995ff9e9df4415e95c15c36dfc48ced06d53a293faf33e958448731dec4"
+            "sha256": "5f95e5ccc40129928d521ac4a488f2f5fce46cdcf656c43784491014cba5c676"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,19 +18,19 @@
     "default": {
         "boto3": {
             "hashes": [
-                "sha256:03d70532b17f7f84df37ca7e8c21553280454dea53ae12b15d1cfef9b16fcb8a",
-                "sha256:04e72071cde022951ce7f81bd9933c90095ab8923e8ced61c8dacfe9edac0f5c"
+                "sha256:51e34e30e65bea4df0ff77f91abdcb97297eb74c3b27eb576b2abbd758452967",
+                "sha256:ff81c6bac708cb95c4f8b27e331ac67d95c6908dd86bcb7b15b8941960f2bc4c"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==1.42.91"
+            "version": "==1.42.93"
         },
         "botocore": {
             "hashes": [
-                "sha256:7a28c3cc6bfab5724ad18899d52402b776a0de7d87fa20c3c5270bcaaf199ce8",
-                "sha256:d252e27bc454afdbf5ed3dc617aa423f2c855c081e98b7963093399483ecc698"
+                "sha256:96ae26cd6302a7c7563398517b90a438168a4efdf4f73ab38882cefb8df721cc",
+                "sha256:9ce49863c50b43f7942edd295fb16bfc6d227264ce6fc32c8f2426ef11b9351b"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==1.42.91"
+            "version": "==1.42.93"
         },
         "docopt": {
             "hashes": [
@@ -47,7 +47,7 @@
             "version": "==3.0.0"
         },
         "guacscanner": {
-            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.0.tar.gz"
+            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.1.tar.gz"
         },
         "jmespath": {
             "hashes": [
