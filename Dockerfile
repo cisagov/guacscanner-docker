@@ -1,8 +1,8 @@
-ARG PY_VERSION=3.10.7
+ARG PY_VERSION=3.14.4
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS compile-stage
+FROM docker.io/library/python:${PY_VERSION}-alpine3.23 AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -13,8 +13,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
 ENV PYTHON_PIP_VERSION=26.0.1
-ENV PYTHON_PIPENV_VERSION=2026.0.3
-ENV PYTHON_SETUPTOOLS_VERSION=82.0.0
+ENV PYTHON_PIPENV_VERSION=2026.5.2
+ENV PYTHON_SETUPTOOLS_VERSION=82.0.1
 
 ###
 # Install the specified versions of pip and setuptools into the system
@@ -46,11 +46,11 @@ RUN python3 -m pip install --no-cache-dir --upgrade \
 ###
 WORKDIR /tmp
 COPY src/Pipfile src/Pipfile.lock ./
-RUN pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
+RUN pipenv install --clear --deploy --extra-pip-args="--no-cache-dir" --verbose
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-slim-bullseye AS build-stage
+FROM docker.io/library/python:${PY_VERSION}-alpine3.23 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -74,18 +74,20 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 ###
 # Create unprivileged user
 ###
-RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
-    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" ${CISA_USER}
+RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
+    && adduser --system --uid ${CISA_UID} --ingroup ${CISA_GROUP} ${CISA_USER}
 
 ###
 # Copy in the Python virtual environment created in compile-stage, symlink the
 # Python binary in the venv to the system-wide Python, and add the venv to the PATH.
 #
 # Note that we symlink the Python binary in the venv to the system-wide Python so that
-# any calls to `python3` will use our virtual environment.
+# any calls to `python3` will use our virtual environment. We are using short flags
+# because the ln binary in Alpine Linux does not support long flags. The -f instructs
+# ln to remove the existing file and the -s instructs ln to create a symbolic link.
 ###
 COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-RUN ln --force --symbolic "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
+RUN ln -fs "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 ###
