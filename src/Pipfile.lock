@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4aec1a7ccc3147c4c0249448c2d1fab874491ccce5e48f3002ebc7e6f2f6b7aa"
+            "sha256": "04ca23aef6e7a631adb42d5f2c6837a3b2b71b755b24e82bee3cf83657cf8c88"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -47,7 +47,7 @@
             "version": "==3.0.0"
         },
         "guacscanner": {
-            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.2.tar.gz"
+            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.3.tar.gz"
         },
         "jmespath": {
             "hashes": [
