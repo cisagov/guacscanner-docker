@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5f95e5ccc40129928d521ac4a488f2f5fce46cdcf656c43784491014cba5c676"
+            "sha256": "4aec1a7ccc3147c4c0249448c2d1fab874491ccce5e48f3002ebc7e6f2f6b7aa"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,19 +18,19 @@
     "default": {
         "boto3": {
             "hashes": [
-                "sha256:51e34e30e65bea4df0ff77f91abdcb97297eb74c3b27eb576b2abbd758452967",
-                "sha256:ff81c6bac708cb95c4f8b27e331ac67d95c6908dd86bcb7b15b8941960f2bc4c"
+                "sha256:1cb77a269596abe05e72ed44a26167e7a620df920edb7c65e7d8a7dd39b427d5",
+                "sha256:f0175de8f52448e9ecade9573532c25bed390a7c30435920a0da42a10f4cafb3"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==1.42.93"
+            "version": "==1.42.95"
         },
         "botocore": {
             "hashes": [
-                "sha256:96ae26cd6302a7c7563398517b90a438168a4efdf4f73ab38882cefb8df721cc",
-                "sha256:9ce49863c50b43f7942edd295fb16bfc6d227264ce6fc32c8f2426ef11b9351b"
+                "sha256:3381279d26792df2fcc3d5d7fa052ecf1949a0fe1ea819bf35d61e943c15a3b6",
+                "sha256:f23a78b76def67222ddac738fb65475f55d17fd88c1e18573b3a561135ec4527"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==1.42.93"
+            "version": "==1.42.95"
         },
         "docopt": {
             "hashes": [
@@ -47,7 +47,7 @@
             "version": "==3.0.0"
         },
         "guacscanner": {
-            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.1.tar.gz"
+            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.2.tar.gz"
         },
         "jmespath": {
             "hashes": [
@@ -139,11 +139,11 @@
         },
         "s3transfer": {
             "hashes": [
-                "sha256:18e25d66fed509e3868dc1572b3f427ff947dd2c56f844a5bf09481ad3f3b2fe",
-                "sha256:8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920"
+                "sha256:61bcd00ccb83b21a0fe7e91a553fff9729d46c83b4e0106e7c314a733891f7c2",
+                "sha256:8e424355754b9ccb32467bdc568edf55be82692ef2002d934b1311dbb3b9e524"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==0.16.0"
+            "version": "==0.16.1"
         },
         "schema": {
             "hashes": [
@@ -159,14 +159,6 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.17.0"
-        },
-        "typing-extensions": {
-            "hashes": [
-                "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466",
-                "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"
-            ],
-            "markers": "python_version >= '3.9'",
-            "version": "==4.15.0"
         },
         "urllib3": {
             "hashes": [

@@ -5,7 +5,7 @@ name = "pypi"
 
 # List any Python dependencies for the image here
 [packages]
-guacscanner = {file = "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.1.tar.gz"}
+guacscanner = {file = "https://github.com/cisagov/guacscanner/archive/v3.0.1-rc.2.tar.gz"}
 
 # This version should match the version of Python in the image
 [requires]
