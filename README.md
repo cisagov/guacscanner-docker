@@ -199,7 +199,7 @@ Build the image locally using this git repository as the [build context](https:/
 ```console
 docker build \
   --tag cisagov/guacscanner:1.2.2-rc.1 \
-  https://github.com/cisagov/guacscanner.git#develop
+  https://github.com/cisagov/guacscanner-docker.git#develop
 ```
 
 ## Cross-platform builds ##
@@ -212,8 +212,8 @@ Docker:
    or the command line:
 
     ```console
-    git clone https://github.com/cisagov/guacscanner.git
-    cd guacscanner
+    git clone https://github.com/cisagov/guacscanner-docker.git
+    cd guacscanner-docker
     ```
 
 1. Create the `Dockerfile-x` file with `buildx` platform support:
