@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "854188965daf95a2f6a534f4e3a19ea5e9bf140096c9e0adc0cdaa4deadc8a6f"
+            "sha256": "62d5d98baf95644e6887491f0a239afbe0f64459488cc38b35c15dd418234514"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,19 +18,19 @@
     "default": {
         "boto3": {
             "hashes": [
-                "sha256:4a60cdf02c52cb0a60f8dbc986142ce2c31e87e3df1438ffe6755b83008f3e4e",
-                "sha256:685c3e6093455623bfc22dac55b4946ea243095252f7f9c11a99d84b38033bcf"
+                "sha256:67510ef57a79f0d53b963b0dd1d1741d1e3de1eb2ef6cf1737b6a6bddd34b8cb",
+                "sha256:8dbb1a129c693313218a099d4f086f3bb48f50159b74b5bd8869e1037fde4101"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==1.43.12"
+            "version": "==1.43.15"
         },
         "botocore": {
             "hashes": [
-                "sha256:75dfb84c6edbb5aaa0314d93776d840d74e26e8d97e0431270a3274d70abeba3",
-                "sha256:7608ecd51687132e22aa8b82acb89a5917b1b68ec0563c25d82c3e16adab9bc0"
+                "sha256:bda4923998d1bf17f8eb6bc767a0923fbb9e525ecd50f839b041e469b46e1c94",
+                "sha256:eed2e24962af03ec361a1dc6924f6b2cff0215a0a2f5c690eab655f43d1f700f"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==1.43.12"
+            "version": "==1.43.15"
         },
         "docopt": {
             "hashes": [
@@ -47,7 +47,7 @@
             "version": "==3.0.0"
         },
         "guacscanner": {
-            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.2-rc.4.tar.gz"
+            "file": "https://github.com/cisagov/guacscanner/archive/v3.0.2.tar.gz"
         },
         "jmespath": {
             "hashes": [
@@ -139,11 +139,11 @@
         },
         "s3transfer": {
             "hashes": [
-                "sha256:9edeb6d1c3c2f89d6050348548834ad8289610d886e5bf7b7207728bd43ce33a",
-                "sha256:ce3801712acf4ad3e89fb9990df97b4972e93f4b3b0004d214be5bce12814c20"
+                "sha256:042dd5e3b1b512355e35a23f0223e426b7042e80b97830ea2680ddce327fc45e",
+                "sha256:5b9827d1044159bbb01b86ef8902760ea39281927f5de31de75e1d657177bf4c"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==0.17.0"
+            "version": "==0.17.1"
         },
         "schema": {
             "hashes": [
