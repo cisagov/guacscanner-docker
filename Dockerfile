@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.14.4
+ARG PY_VERSION=3.14.5
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
@@ -12,8 +12,8 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=26.0.1
-ENV PYTHON_PIPENV_VERSION=2026.5.2
+ENV PYTHON_PIP_VERSION=26.1.1
+ENV PYTHON_PIPENV_VERSION=2026.6.1
 ENV PYTHON_SETUPTOOLS_VERSION=82.0.1
 
 ###
