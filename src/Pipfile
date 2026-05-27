@@ -9,4 +9,4 @@ guacscanner = {file = "https://github.com/cisagov/guacscanner/archive/v3.0.2.tar
 
 # This version should match the version of Python in the image
 [requires]
-python_full_version = "3.14.4"
+python_full_version = "3.14.5"

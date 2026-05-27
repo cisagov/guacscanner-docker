@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.14.4
+ARG PY_VERSION=3.14.5
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
