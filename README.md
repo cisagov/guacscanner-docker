@@ -123,7 +123,7 @@ tag (e.g. `:1.3.0`).
 | Image:tag | Description |
 | --------- | ----------- |
 | `cisagov/guacscanner:1.3.0` | An exact release version. |
-| `cisagov/guacscanner:1.2` | The most recent release matching the major and minor version numbers. |
+| `cisagov/guacscanner:1.3` | The most recent release matching the major and minor version numbers. |
 | `cisagov/guacscanner:1` | The most recent release matching the major version number. |
 | `cisagov/guacscanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 | `cisagov/guacscanner:nightly` | A nightly build of the `develop` branch of this repository. |
