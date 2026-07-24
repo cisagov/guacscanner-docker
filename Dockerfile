@@ -1,8 +1,8 @@
-ARG PY_VERSION=3.14.5
+ARG PY_VERSION=3.14.6
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-alpine3.23 AS compile-stage
+FROM docker.io/library/python:${PY_VERSION}-alpine3.24 AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -12,9 +12,9 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=26.1.1
-ENV PYTHON_PIPENV_VERSION=2026.6.1
-ENV PYTHON_SETUPTOOLS_VERSION=82.0.1
+ENV PYTHON_PIP_VERSION=26.1.2
+ENV PYTHON_PIPENV_VERSION=2026.6.2
+ENV PYTHON_SETUPTOOLS_VERSION=83.0.0
 
 ###
 # Install the specified versions of pip and setuptools into the system
@@ -50,7 +50,7 @@ RUN pipenv install --clear --deploy --extra-pip-args="--no-cache-dir" --verbose
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
-FROM docker.io/library/python:${PY_VERSION}-alpine3.23 AS build-stage
+FROM docker.io/library/python:${PY_VERSION}-alpine3.24 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
