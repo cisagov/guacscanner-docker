@@ -9,7 +9,7 @@
       depNameTemplate: "cisagov/guacscanner",
       managerFilePatterns: ["/^src/Pipfile$/"],
       matchStrings: [
-        "cisagov/guacscanner/archive/(?<currentValue>\\S+)", // src/Pipfile
+        "cisagov/guacscanner/archive/(?<currentValue>\\S+).tar.gz",
       ],
       versioningTemplate: "semver-coerced", // handles the leading `v`
     },
